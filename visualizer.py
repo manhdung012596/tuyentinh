@@ -39,7 +39,7 @@ def plot_system_3d(A, b, solution, output_file="gauss_3d.png"):
     plt.show()
     plt.close()
 
-def plot_convergence(history, exact_solution, method_name, output_file):
+def plot_convergence(history, exact_solution, method_name, output_file, show=True):
     """
     Plots the L2 error vs iteration for a single method.
     """
@@ -56,8 +56,10 @@ def plot_convergence(history, exact_solution, method_name, output_file):
     
     plt.savefig(output_file)
     print(f"Saved {output_file}")
-    plt.show()
-    plt.close()
+    
+    if show:
+        plt.show()
+        plt.close()
 
 def plot_comparison(gs_history, sor_history, exact_solution, output_file="comparison.png"):
     """

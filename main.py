@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import numpy as np
 from solvers import gauss_elimination, lu_decomposition, gauss_seidel_method, sor_method
 from visualizer import plot_system_3d, plot_convergence, plot_lu_matrices
@@ -74,7 +75,8 @@ def main():
         result_gs = gauss_seidel_method(A, b, tol=1e-8)
         print_result("Gauss-Seidel Method (Iterative)", result_gs, exact_solution)
         gs_history = result_gs[1]['history']
-        plot_convergence(gs_history, exact_solution, "Gauss-Seidel", "gauss_seidel_convergence.png")
+        # Defer showing plot
+        plot_convergence(gs_history, exact_solution, "Gauss-Seidel", "gauss_seidel_convergence.png", show=False)
     except Exception as e:
         print(f"Gauss-Seidel Method failed: {e}")
 
@@ -83,11 +85,14 @@ def main():
         result_sor = sor_method(A, b, omega=1.1, tol=1e-8)
         print_result("SOR Method (Iterative, omega=1.1)", result_sor, exact_solution)
         sor_history = result_sor[1]['history']
-        plot_convergence(sor_history, exact_solution, "SOR", "sor_convergence.png")
+        # Defer showing plot
+        plot_convergence(sor_history, exact_solution, "SOR", "sor_convergence.png", show=False)
     except Exception as e:
         print(f"SOR Method failed: {e}")
         
     print("\nDemo Completed. Check generated PNG files.")
+    print("Opening remaining plots...")
+    plt.show() # Shows GS and SOR plots together
 
 if __name__ == "__main__":
     main()
